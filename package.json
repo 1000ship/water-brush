@@ -1,0 +1,8 @@
+{
+  "name": "particle-draw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/1000ship/particle-draw.git",
+  "author": "1000ship <cjstjdgur1234@gmail.com>",
+  "license": "MIT"
+}
