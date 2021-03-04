@@ -4,5 +4,17 @@
   "main": "index.js",
   "repository": "https://github.com/1000ship/particle-draw.git",
   "author": "1000ship <cjstjdgur1234@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "watch": "nodemon --exec yarn build",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "pixi.js": "^6.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0"
+  }
 }
