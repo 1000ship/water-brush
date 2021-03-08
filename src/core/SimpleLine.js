@@ -13,7 +13,6 @@ class SimpleLine extends PIXI.Graphics {
   next(x, y) {
     this.points.push([x, y]);
     this.draw();
-    console.log( "next")
   }
 
   draw() {
