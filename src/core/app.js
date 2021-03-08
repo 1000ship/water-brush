@@ -9,8 +9,7 @@ class App extends PIXI.Application {
     this.fitToScreen = throttle(() => {
       const minimum =
         window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
-      this.view.width = minimum;
-      this.view.height = minimum;
+      this.renderer.resize(minimum, minimum)
     }, 500);
 
     this.fitToScreen();
