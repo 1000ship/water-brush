@@ -6,16 +6,10 @@ const app = new App({
   backgroundColor: 0x1099bb,
 })
 const graphics = new PIXI.Graphics();
-
-// Rectangle
-// graphics.beginFill(0xde3249);
-// graphics.drawRect(0, 0, 100, 100);
-// graphics.endFill();
+graphics.filters = [ new PIXI.filters.BlurFilter(16, 8) ]
 
 let points = [[100,100], [200,300]]
 
-
-let prevX = null, prevY = null
 app.stage.addChild(graphics);
 app.ticker.add( delta => {
   const {x, y} = app.renderer.plugins.interaction.mouse.global;
