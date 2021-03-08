@@ -4,6 +4,9 @@ class EventManager {
     this.onMove = onMove;
     this.onEnd = onEnd;
 
+    this._prevX = null;
+    this._prevY = null;
+
     app.view.addEventListener("mousedown", (e) => {
       const { offsetX: x, offsetY: y } = e;
       this?.onStart(x, y);
@@ -16,12 +19,14 @@ class EventManager {
 
     app.view.addEventListener("mousemove", (e) => {
       const { offsetX: x, offsetY: y } = e;
-      this?.onMove(x, y);
+      this?.onMove(x, y, {pointerType: "mouse", pressure: 0.5, deltaX: x - this._prevX, deltaY: y - this._prevY});
+      this._prevX = x; this._prevY = y;
     });
 
     app.view.addEventListener("touchmove", (e) => {
-      const { globalX: x, globalY: y } = e.changedTouches[0];
-      this?.onMove(x, y);
+      const { globalX: x, globalY: y, pointerType, pressure } = e.changedTouches[0];
+      this?.onMove(x, y, {pointerType, pressure, deltaX: x - this._prevX, deltaY: y - this._prevY});
+      this._prevX = x; this._prevY = y;
     });
 
     window.addEventListener("mouseup", (e) => {
