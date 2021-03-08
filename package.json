@@ -6,6 +6,7 @@
   "author": "1000ship <cjstjdgur1234@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "serve",
     "watch": "nodemon --exec yarn build",
     "build": "webpack"
   },
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7",
+    "serve": "^11.3.2",
     "webpack": "^5.24.3",
     "webpack-cli": "^4.5.0"
   }
