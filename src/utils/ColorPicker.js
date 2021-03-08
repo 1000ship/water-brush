@@ -15,7 +15,7 @@ class ColorPicker {
 
 
     document.body.appendChild(this.$container);
-    this.$container.appendChild(this.$colorPicker);
+    // this.$container.appendChild(this.$colorPicker);
     this.$container.appendChild(this.$clearButton);
     this.$container.appendChild(this.$undoButton);
 
