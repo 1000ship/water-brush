@@ -1,4 +1,4 @@
-export default function throttle (func, time) {
+function throttle (func, time) {
   var timeoutId = null
   return function (...args) {
     if( !timeoutId ){
@@ -10,3 +10,5 @@ export default function throttle (func, time) {
     }
   }
 }
+
+module.exports = {throttle}

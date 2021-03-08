@@ -1,31 +1,47 @@
 import "./index.css";
 
-const PIXI = require('pixi.js')
-const App = require("./core/App");
-const SimpleLine = require("./core/SimpleLine");
-const EventManager = require('./utils/EventManager')
-const TextDisplay = require('./utils/TextDisplay')
-
+import * as PIXI from "pixi.js";
+import App from "./core/App";
+import EventManager from "./utils/EventManager";
+import TextDisplay from "./utils/TextDisplay";
 import InkOnPaper from "./filters/InkOnPaper";
 import SpreadLine from "./core/SpreadLine";
+import ColorPicker from "./utils/ColorPicker";
+import ColorAdder from "./filters/ColorAdder";
 
 const app = new App({
   root: document.body,
   backgroundColor: 0xffffff,
 });
-const textDisplay = new TextDisplay()
+app.stage.filters = [new PIXI.filters.BlurFilter(16, 16), InkOnPaper];
 
-app.stage.filters =[new PIXI.filters.BlurFilter(16, 16), InkOnPaper]
+let currentLine = null;
+let lines = []
 
-let line = null
+const textDisplay = new TextDisplay();
+const colorPicker = new ColorPicker();
+colorPicker.onClear = () => {
+  app.stage.removeChildren()
+  lines = []
+}
+colorPicker.onUndo = () => {
+  app.stage.removeChild( lines.pop() )
+}
+
 const onStart = (x, y) => {
-  line = new SpreadLine(x, y)
-  app.stage.addChild(line)
-}
-const onMove = (x, y, {pressure, deltaX, deltaY, pointerType}) => {
-  let water = pointerType === "touch" ? pressure : 1 - Math.min(1,Math.sqrt((deltaX ** 2) + (deltaY ** 2))/100)
-  line?.next(x, y, {water})
-  textDisplay.setText(water)
-}
-const onEnd = (x, y) => line = null
-const eventManager = new EventManager({app, onStart, onMove, onEnd})
+  currentLine = new SpreadLine(x, y);
+  const { r, g, b } = colorPicker;
+  console.log( r,g,b)
+  currentLine.filters = [ColorAdder(r, g, b)];
+  lines.push(currentLine)
+  app.stage.addChild(currentLine);
+};
+const onMove = (x, y, { pressure, deltaX, deltaY, pointerType }) => {
+  let water =
+    pointerType === "touch"
+      ? pressure
+      : 1 - Math.min(1, Math.sqrt(deltaX ** 2 + deltaY ** 2) / 100);
+  currentLine?.next(x, y, { water });
+};
+const onEnd = (x, y) => (currentLine = null);
+const eventManager = new EventManager({ app, onStart, onMove, onEnd });
