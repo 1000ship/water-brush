@@ -8,10 +8,10 @@
   "scripts": {
     "start": "webpack serve --config ./webpack.config.js",
     "build": "webpack",
-    "deploy": "echo 1",
-    "predeploy": "webpack && cp index.html dist"
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
-  "homepage": "https://1000ship.github.io/water-brush",
+  "homepage": "https://waterbrush.1000ship.me",
   "dependencies": {
     "pixi.js": "^6.0.0"
   },
