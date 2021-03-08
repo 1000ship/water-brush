@@ -8,13 +8,13 @@ class App extends PIXI.Application {
     root.appendChild(this.view);
     
     this.fitToScreen = throttle(() => {
-      this.renderer.view.style.width = window.innerWidth;
-      this.renderer.view.style.height = window.innerHeight;
+      const minimum = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth
+      this.view.width = minimum;
+      this.view.height = minimum;
     }, 500);
     
     this.fitToScreen();
     window.addEventListener("resize", this.fitToScreen); 
-
   }
   
   set onEnterFrame ( onEnterFrame ) {

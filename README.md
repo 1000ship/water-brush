@@ -1,7 +1,8 @@
 # 개발 계획
-> 2021. 03. 05.
 
-### PixiJS를 다뤄본다.
+
+
+## PixiJS를 다뤄본다.
 - 선 그리기, 선 속성
 - DisplayObject 만들어 그려보기
 - 각종 Filter 사용해보기 (Blur, ColorMatrix, DisplacementMap, ...)
@@ -22,3 +23,8 @@
 
 ## 고민거리
 - BitmapData처럼 비트맵에 자기자신을 Filter 적용하여 또 그리게 할 방법이 마땅히 떠오르지 않음..
+
+- PixiJS 의 한계
+  - LineStyle에 Line Cap 이 없다. 직접 구현해서 써야할듯
+- Canvas2D의 한계
+  - filter 기능이 Safari 브라우저에서 동작하지 않는다.

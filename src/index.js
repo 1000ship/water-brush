@@ -1,28 +1,41 @@
+import { graphicsUtils } from "pixi.js";
+import "./index.css";
 const PIXI = require("pixi.js");
-const App = require("./core/app");
+const App = require("./core/App");
+const SimpleLine = require("./core/SimpleLine");
 
 const app = new App({
   root: document.body,
-  backgroundColor: 0x1099bb,
-})
-const graphics = new PIXI.Graphics();
-graphics.filters = [ new PIXI.filters.BlurFilter(16, 8) ]
+  backgroundColor: 0xffffff,
+});
 
-let points = [[100,100], [200,300]]
+let simpleLine = null;
 
-app.stage.addChild(graphics);
-app.ticker.add( delta => {
-  const {x, y} = app.renderer.plugins.interaction.mouse.global;
+app.view.addEventListener("mousemove", (e) => {
+  const { offsetX: x, offsetY: y } = e;
+  simpleLine?.next(x, y);
+});
 
-  points.push( [x,y] )
-  if( points.length > 100 )
-    points.splice( 0, 1 )
-  
-  graphics.clear()
-  graphics.moveTo( points[0][0], points[0][1] )
-  for( let i = 0; i < points.length; ++i )
-  {
-    graphics.lineStyle( 120 - (i / 10) * 10, 0xFFFFFF, i / 100, 0.5)
-    graphics.lineTo( points[i][0], points[i][1] )
-  }
-})
+app.view.addEventListener("mousedown", (e) => {
+  const { offsetX: x, offsetY: y } = e;
+  simpleLine = new SimpleLine(x, y);
+  app.stage.addChild(simpleLine);
+  console.log("mousedown");
+});
+
+app.view.addEventListener("touchmove", (e) => {
+  const { globalX: x, globalY: y } = e.changedTouches[0];
+  simpleLine?.next(x, y);
+});
+
+app.view.addEventListener("touchstart", (e) => {
+  const { globalX: x, globalY: y } = e.changedTouches[0];
+  simpleLine = new SimpleLine(x, y);
+
+  app.stage.addChild(simpleLine);
+  console.log("touchstart");
+});
+
+const releaseLine = () => simpleLine = null;
+window.addEventListener('mouseup', releaseLine );
+window.addEventListener('touchend', releaseLine );
