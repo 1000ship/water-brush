@@ -11,6 +11,7 @@ module.exports = {
     new HtmlWebpackPlugin()
   ],
   devServer: {
+    host: "0.0.0.0",
     port: 5000,
     open: "Google Chrome",
     hot: true,
