@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CpWebpackPlugin = require('cp-webpack-plugin');
 
 module.exports = {
-  mode: "development",
+  mode: process.env.NODE_ENV || "development",
   entry: './src/index.js',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

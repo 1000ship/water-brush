@@ -9,7 +9,7 @@
     "start": "webpack serve --config ./webpack.config.js",
     "build": "webpack",
     "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build && cp CNAME dist"
+    "predeploy": "NODE_ENV=production npm run build && cp CNAME dist"
   },
   "homepage": "https://waterbrush.1000ship.me",
   "dependencies": {
