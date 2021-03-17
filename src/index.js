@@ -39,7 +39,7 @@ const onMove = (x, y, { pressure, deltaX, deltaY, pointerType }) => {
   let water =
     pointerType === "touch"
       ? pressure
-      : 1 - Math.min(1, Math.sqrt(deltaX ** 2 + deltaY ** 2) / 100);
+      : 0.8 - Math.min(1, Math.sqrt(deltaX ** 2 + deltaY ** 2) / 100) * 0.5;
   currentLine?.next(x, y, { water });
 };
 const onEnd = (x, y) => (currentLine = null);
