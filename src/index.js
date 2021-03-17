@@ -16,24 +16,23 @@ const app = new App({
 app.stage.filters = [new PIXI.filters.BlurFilter(16, 16), InkOnPaper];
 
 let currentLine = null;
-let lines = []
+let lines = [];
 
 const textDisplay = new TextDisplay();
 const colorPicker = new ColorPicker();
 colorPicker.onClear = () => {
-  app.stage.removeChildren()
-  lines = []
-}
+  app.stage.removeChildren();
+  lines = [];
+};
 colorPicker.onUndo = () => {
-  app.stage.removeChild( lines.pop() )
-}
+  app.stage.removeChild(lines.pop());
+};
 
 const onStart = (x, y) => {
   currentLine = new SpreadLine(x, y);
   const { r, g, b } = colorPicker;
-  console.log( r,g,b)
   currentLine.filters = [ColorAdder(r, g, b)];
-  lines.push(currentLine)
+  lines.push(currentLine);
   app.stage.addChild(currentLine);
 };
 const onMove = (x, y, { pressure, deltaX, deltaY, pointerType }) => {

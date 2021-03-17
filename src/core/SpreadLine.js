@@ -17,6 +17,7 @@ class SpreadLine extends PIXI.Graphics {
   }
 
   draw() {
+    if (!this.points.some((each) => each.water > 0.1)) return;
     if (!this.animationFrameID) return;
     this.clear();
     if (this.points.length === 0) return;
@@ -37,4 +38,4 @@ class SpreadLine extends PIXI.Graphics {
   }
 }
 
-export default SpreadLine
+export default SpreadLine;
