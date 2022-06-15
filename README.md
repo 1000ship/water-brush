@@ -1,10 +1,8 @@
 # Water Brush
 
-
-
-<img src="_readme/soft_hard.gif" alt="Soft&Hard"/>
-
 ## Demo
+
+<img src="_readme/preview.webp" alt="Preview"/>
 
 #### 	Try it here, https://waterbrush.1000ship.me/
 
@@ -27,3 +25,5 @@ npm run start
 ## Rainbow
 
 <img src="_readme/rainbow.jpg" alt="Rainbow"/>
+
+<img src="_readme/soft_hard.gif" alt="Soft&Hard"/>
